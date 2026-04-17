@@ -41,12 +41,13 @@ SSM consistently outperforms single-task and baseline models across diverse data
 
 
 ### 📎 Citation
-'''
+```
 @article{li2026bidirectional,
   title={Bidirectional Learning of Facial Action Units and Expressions via Structured Semantic Mapping across Heterogeneous Datasets},
   author={Li, Jia and Zhang, Yu and Chen, Yin and Hu, Zhenzhen and Li, Yong and Hong, Richang and Shan, Shiguang and Wang, Meng},
   journal={arXiv preprint arXiv:2604.10541},
   year={2026}
 }
-'''
+```
+
 
