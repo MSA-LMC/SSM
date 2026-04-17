@@ -1,6 +1,8 @@
 ## Bidirectional Learning of Facial Action Units and Expressions via Structured Semantic Mapping across Heterogeneous Datasets
 
-<img width="740" height="314" alt="image" src="https://github.com/user-attachments/assets/c50dc554-9010-4f09-b2f0-832198ce9cd6" />
+<img width="561" height="238" alt="image" src="https://github.com/user-attachments/assets/84ff5187-1533-4353-b582-99ee7759d158" />
+
+
 
 ### TL;DR
 
@@ -33,10 +35,11 @@ SSM presents a Structured Semantic Mapping (SSM) framework for bidirectional lea
 
 SSM consistently outperforms single-task and baseline models across diverse dataset combinations.  ￼
 
-<img width="746" height="297" alt="image" src="https://github.com/user-attachments/assets/08695279-9768-45fb-bbb6-c6e6470892f2" />
-<img width="742" height="315" alt="image" src="https://github.com/user-attachments/assets/5c03d81b-300d-4109-9872-4ad54455da42" />
-<img width="740" height="453" alt="image" src="https://github.com/user-attachments/assets/7069e745-3202-456c-bf23-89e9a6581019" />
+<img width="451" height="182" alt="image" src="https://github.com/user-attachments/assets/968302f1-106d-4e3c-aa6b-bd67693f5895" />
 
+<img width="659" height="269" alt="image" src="https://github.com/user-attachments/assets/0818da66-6fa2-44e4-8b19-51f1e2d67e65" />
+
+<img width="551" height="336" alt="image" src="https://github.com/user-attachments/assets/623fdc58-b3a7-41de-9740-9ba57c5b0a17" />
 
 
 
