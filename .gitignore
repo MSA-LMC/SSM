@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environments and packaging
+.venv/
+venv/
+env/
+build/
+dist/
+*.egg-info/
+
+# IDE and operating system
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local datasets and generated metadata
+/data/
+*.lmdb
+*.mdb
+
+# Training and evaluation outputs
+outputs/
+output/
+logs/
+log/
+runs/
+wandb/
+tensorboard/
+*.log
+
+# Model weights
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+*.onnx
+*.bin
+checkpoints/
+
+# Generated figures and temporary files
+*.png
+*.pdf
+tmp/
+temp/
