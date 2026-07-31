@@ -23,7 +23,7 @@ dist/
 Thumbs.db
 
 # Local datasets and generated metadata
-data/
+/data/
 *.lmdb
 *.mdb
 

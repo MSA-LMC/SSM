@@ -1,0 +1,304 @@
+{
+    "legacy_compatibility":  true,
+    "experiment":  {
+                       "name":  "ssm_bp4d_mafw_d5_a1",
+                       "emotion_dataset":  "MAFW",
+                       "au_dataset":  "BP4D",
+                       "emotion_fold":  5,
+                       "au_fold":  1,
+                       "seed":  1,
+                       "epochs":  30
+                   },
+    "data":  {
+                 "emotion":  {
+                                 "num_classes":  11,
+                                 "class_names":  [
+                                                     "happiness",
+                                                     "sadness",
+                                                     "neutral",
+                                                     "anger",
+                                                     "surprise",
+                                                     "disgust",
+                                                     "fear",
+                                                     "contempt",
+                                                     "anxiety",
+                                                     "helplessness",
+                                                     "disappointment"
+                                                 ],
+                                 "batch_size":  12,
+                                 "num_segments":  16,
+                                 "duration":  1,
+                                 "image_size":  224,
+                                 "workers":  4,
+                                 "shuffle_train":  true,
+                                 "drop_last_train":  true,
+                                 "drop_last_val":  true,
+                                 "train_sampling":  "legacy_random_segment",
+                                 "eval_sampling":  "legacy_segment_center",
+                                 "augmentation":  {
+                                                      "group_random_sized_crop":  true,
+                                                      "group_random_horizontal_flip":  true,
+                                                      "random_erasing":  false
+                                                  },
+                                 "train_normalization":  {
+                                                             "mean":  [
+                                                                          0.485,
+                                                                          0.456,
+                                                                          0.406
+                                                                      ],
+                                                             "std":  [
+                                                                         0.229,
+                                                                         0.224,
+                                                                         0.225
+                                                                     ]
+                                                         },
+                                 "eval_normalization":  {
+                                                            "mean":  [
+                                                                         0.481,
+                                                                         0.457,
+                                                                         0.408
+                                                                     ],
+                                                            "std":  [
+                                                                        0.268,
+                                                                        0.261,
+                                                                        0.275
+                                                                    ]
+                                                        }
+                             },
+                 "au":  {
+                            "num_classes":  12,
+                            "au_ids":  [
+                                           1,
+                                           2,
+                                           4,
+                                           6,
+                                           7,
+                                           10,
+                                           12,
+                                           14,
+                                           15,
+                                           17,
+                                           23,
+                                           24
+                                       ],
+                            "subjects":  [
+                                             "F001",
+                                             "F002",
+                                             "F003",
+                                             "F004",
+                                             "F005",
+                                             "F006",
+                                             "F007",
+                                             "F008",
+                                             "F009",
+                                             "F010",
+                                             "F011",
+                                             "F012",
+                                             "F013",
+                                             "F014",
+                                             "F015",
+                                             "F016",
+                                             "F017",
+                                             "F018",
+                                             "F019",
+                                             "F020",
+                                             "F021",
+                                             "F022",
+                                             "F023",
+                                             "M001",
+                                             "M002",
+                                             "M003",
+                                             "M004",
+                                             "M005",
+                                             "M006",
+                                             "M007",
+                                             "M008",
+                                             "M009",
+                                             "M010",
+                                             "M011",
+                                             "M012",
+                                             "M013",
+                                             "M014",
+                                             "M015",
+                                             "M016",
+                                             "M017",
+                                             "M018"
+                                         ],
+                            "batch_size":  9,
+                            "clip_len":  16,
+                            "temporal_step":  1,
+                            "stride":  16,
+                            "image_size":  224,
+                            "workers":  4,
+                            "shuffle_train":  true,
+                            "drop_last_train":  true,
+                            "drop_last_val":  true,
+                            "skip_invalid":  true,
+                            "verify_images":  false,
+                            "sync_transform":  true,
+                            "normalization":  {
+                                                  "mean":  [
+                                                               0.481,
+                                                               0.457,
+                                                               0.408
+                                                           ],
+                                                  "std":  [
+                                                              0.268,
+                                                              0.261,
+                                                              0.275
+                                                          ]
+                                              },
+                            "augmentation":  {
+                                                 "resize":  256,
+                                                 "random_resized_crop":  {
+                                                                             "size":  224,
+                                                                             "scale":  [
+                                                                                           0.8,
+                                                                                           1.0
+                                                                                       ],
+                                                                             "ratio":  [
+                                                                                           0.9,
+                                                                                           1.1
+                                                                                       ]
+                                                                         },
+                                                 "horizontal_flip_probability":  0.5,
+                                                 "random_erasing":  false
+                                             }
+                        },
+                 "pairing":  {
+                                 "one_batch_per_task":  true,
+                                 "epoch_length":  "longer_loader",
+                                 "restart_shorter_loader":  true
+                             }
+             },
+    "model":  {
+                  "clip_arch":  "ViT-B/16",
+                  "text_encoder_frozen":  true,
+                  "prompt":  {
+                                 "contexts_number":  8,
+                                 "class_specific_contexts":  "True",
+                                 "class_token_position":  "end",
+                                 "text_type":  "class_descriptor"
+                             },
+                  "temporal":  {
+                                   "num_frames":  16,
+                                   "input_dim":  512,
+                                   "depth":  1,
+                                   "heads":  8,
+                                   "mlp_dim":  1024,
+                                   "dim_head":  64
+                               },
+                  "moe":  {
+                              "replace_last_n_ffn":  6,
+                              "private_experts":  4,
+                              "expert_hidden_dim":  512,
+                              "top_k":  2,
+                              "temperature":  1.0,
+                              "noise_std":  0.01,
+                              "residual_alpha_init":  0.1
+                          },
+                  "semantic_mapping":  {
+                                           "delta_map1_init":  0.0,
+                                           "delta_map2_init":  0.0,
+                                           "alpha_init":  0.1,
+                                           "beta_init":  0.1,
+                                           "epsilon":  1E-08,
+                                           "similarity_temperature":  0.01,
+                                           "semantic_logit_weight":  0.1,
+                                           "dataset_specific_prior":  true
+                                       }
+              },
+    "optimization":  {
+                         "optimizer":  {
+                                           "name":  "AdamW",
+                                           "weight_decay":  0.0001,
+                                           "learning_rates":  {
+                                                                  "encoder":  0.000001,
+                                                                  "delta_map1":  0.01,
+                                                                  "delta_map2":  0.01,
+                                                                  "other":  0.0001
+                                                              }
+                                       },
+                         "scheduler":  {
+                                           "name":  "MultiStepLR",
+                                           "milestones":  [
+                                                              10,
+                                                              25
+                                                          ],
+                                           "gamma":  0.1,
+                                           "step_timing":  "after_epoch"
+                                       },
+                         "mixup":  {
+                                       "enabled":  true,
+                                       "alpha":  0.4,
+                                       "scope":  "flattened_au_frames"
+                                   },
+                         "ema":  {
+                                     "enabled":  true,
+                                     "decay":  0.99,
+                                     "update_after_optimizer":  true,
+                                     "evaluate_with_ema":  true
+                                 },
+                         "loss_balance":  {
+                                              "moving_mean_momentum":  0.95,
+                                              "epsilon":  1E-08,
+                                              "au_weight":  2.0,
+                                              "denominator":  3.0,
+                                              "auxiliary_ramp":  {
+                                                                     "horizon_epochs":  30,
+                                                                     "gain":  10.0,
+                                                                     "formula":  "2/(1+exp(-10*epoch/30))-1"
+                                                                 }
+                                          },
+                         "gradient_clip_norm":  1.0
+                     },
+    "runtime":  {
+                    "device":  "cuda",
+                    "data_parallel":  true,
+                    "gpu_ids":  [
+                                    0,
+                                    1,
+                                    2
+                                ],
+                    "pin_memory":  true,
+                    "cudnn_benchmark":  false,
+                    "cudnn_deterministic":  true,
+                    "reset_seed_per_fold":  true,
+                    "print_frequency":  100
+                },
+    "evaluation":  {
+                       "emotion_metrics":  [
+                                               "uar",
+                                               "war"
+                                           ],
+                       "au_metrics":  [
+                                          "mean_f1",
+                                          "per_au_f1",
+                                          "mean_auc"
+                                      ],
+                       "checkpoint_selection_metric":  "emotion_validation_accuracy",
+                       "legacy_validation_pairing":  "zip_shortest",
+                       "au_threshold":  {
+                                            "default":  0.5,
+                                            "search_start":  0.01,
+                                            "search_stop":  0.99,
+                                            "search_step":  0.01
+                                        },
+                       "majority_vote":  {
+                                             "enabled":  true,
+                                             "half_window":  3,
+                                             "positive_ratio":  0.3
+                                         }
+                   },
+    "paths":  {
+                  "data_root":  "data",
+                  "emotion_frame_root":  "data/MAFW/frames",
+                  "emotion_train_manifest":  "splits/emotion/MAFW/MAFW_set_{emotion_fold}_train.txt",
+                  "emotion_val_manifest":  "splits/emotion/MAFW/MAFW_set_{emotion_fold}_test.txt",
+                  "au_image_root":  "data/BP4D/Images",
+                  "au_train_manifest":  "splits/bp4d/train_{au_fold}f_data.list",
+                  "au_val_manifest":  "splits/bp4d/test_{au_fold}f_data.list",
+                  "clip_cache_dir":  "",
+                  "output_dir":  "outputs/bp4d_mafw/d{emotion_fold}_a{au_fold}"
+              }
+}
