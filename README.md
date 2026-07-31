@@ -2,48 +2,81 @@
 
 <img width="561" height="238" alt="image" src="https://github.com/user-attachments/assets/84ff5187-1533-4353-b582-99ee7759d158" />
 
-
-
 ### TL;DR
 
+SSM presents a Structured Semantic Mapping (SSM) framework for bidirectional learning between Facial Action Units (AUs) and Facial Expressions (FEs) under heterogeneous datasets. Unlike prior one-way transfer (AU → FE), SSM enables mutual enhancement (AU ↔ FE) without requiring joint annotations, addressing inconsistencies in annotation granularity and data domains.
 
-SSM presents a Structured Semantic Mapping (SSM) framework for bidirectional learning between Facial Action Units (AUs) and Facial Expressions (FEs) under heterogeneous datasets. Unlike prior one-way transfer (AU → FE), SSM enables mutual enhancement (AU ↔ FE) without requiring joint annotations, addressing inconsistencies in annotation granularity and data domains.  
-🚧 This paper is currently under review. Code will be released upon acceptance.
-￼
+🚧 This paper is currently under review.
 
 ### 🔑 Key Ideas
-- **Bidirectional Learning across Tasks**  
+
+- **Bidirectional Learning across Tasks**
   Establishes reciprocal knowledge transfer between fine-grained AUs and coarse-grained expressions.
-- **Textual Semantic Prototypes (TSP)**  
+- **Textual Semantic Prototypes (TSP)**
   Builds structured semantic anchors from textual descriptions with learnable prompts.
-- **Dynamic Prior Mapping (DPM)**  
+- **Dynamic Prior Mapping (DPM)**
   Learns a bidirectional, data-driven association matrix guided by FACS priors for cross-task alignment.
-- **Heterogeneous Joint Learning**  
+- **Heterogeneous Joint Learning**
   Enables training across datasets with different annotation formats (frame-level vs. clip-level).
 
-
 ### 🚀 Highlights
-	•	First systematic study of AU ↔ FE bidirectional learning under heterogeneous supervision
-	•	Achieves state-of-the-art performance on multiple AU and DFER benchmarks
-	•	Demonstrates that expression semantics can improve AU detection, not just the reverse
-	•	Strong cross-dataset generalization and zero-shot transfer ability  ￼
 
+- First systematic study of AU ↔ FE bidirectional learning under heterogeneous supervision
+- Achieves state-of-the-art performance on multiple AU and DFER benchmarks
+- Demonstrates that expression semantics can improve AU detection, not just the reverse
+- Strong cross-dataset generalization and zero-shot transfer ability
 
 ### 📊 Benchmarks for Experiments
-	•	AU datasets: BP4D, DISFA
-	•	DFER datasets: DFEW, FERV39K, MAFW
 
-SSM consistently outperforms single-task and baseline models across diverse dataset combinations.  ￼
+- AU datasets: BP4D, DISFA
+- DFER datasets: DFEW, FERV39K, MAFW
+
+SSM consistently outperforms single-task and baseline models across diverse dataset combinations.
 
 <img width="451" height="182" alt="image" src="https://github.com/user-attachments/assets/968302f1-106d-4e3c-aa6b-bd67693f5895" />
 
 <img width="659" height="269" alt="image" src="https://github.com/user-attachments/assets/0818da66-6fa2-44e4-8b19-51f1e2d67e65" />
-
 <img width="551" height="336" alt="image" src="https://github.com/user-attachments/assets/623fdc58-b3a7-41de-9740-9ba57c5b0a17" />
 
+### Installation
 
+```bash
+conda env create -f environment.yml
+conda activate ssm
+```
+
+### Data
+
+Prepare the datasets following [docs/DATA.md](docs/DATA.md). The experiment split files are included in `splits/`.
+
+### Training
+
+The six BP4D/DISFA and DFEW/FERV39K/MAFW combinations are configured in `configs/`.
+
+```bash
+python train.py --config configs/bp4d_dfew.json
+```
+
+Use `--emotion-fold` and `--au-fold` for one fold pair, or `--all-folds` for all configured pairs. The release configurations reproduce the original three-GPU DataParallel setup.
+
+### Models
+
+Pretrained models will be provided through [GitHub Releases](https://github.com/MSA-LMC/SSM/releases). Expression results use `best_emotion.pth`, and AU results use `best_au.pth`.
+
+### Evaluation
+
+```bash
+python evaluate.py \
+  --config configs/bp4d_dfew.json \
+  --checkpoint /path/to/checkpoint.pth \
+  --emotion-fold 5 \
+  --au-fold 1
+```
+
+The configuration and fold pair must match the checkpoint.
 
 ### 📎 Citation
+
 ```
 @article{li2026bidirectional,
   title={Bidirectional Learning of Facial Action Units and Expressions via Structured Semantic Mapping across Heterogeneous Datasets},
@@ -53,4 +86,6 @@ SSM consistently outperforms single-task and baseline models across diverse data
 }
 ```
 
+### Acknowledgments
 
+This repository builds on [DFER-CLIP](https://github.com/zengqunzhao/DFER-CLIP), [OpenAI CLIP](https://github.com/openai/CLIP), and [CoOp](https://github.com/KaiyangZhou/CoOp).
