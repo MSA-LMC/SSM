@@ -6,7 +6,8 @@
 
 SSM presents a Structured Semantic Mapping (SSM) framework for bidirectional learning between Facial Action Units (AUs) and Facial Expressions (FEs) under heterogeneous datasets. Unlike prior one-way transfer (AU → FE), SSM enables mutual enhancement (AU ↔ FE) without requiring joint annotations, addressing inconsistencies in annotation granularity and data domains.
 
-🚧 This paper is currently under review.
+🚧 This paper is currently under review...
+🚧 This code repository will be continuously updated...
 
 ### 🔑 Key Ideas
 
