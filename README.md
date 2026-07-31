@@ -63,7 +63,7 @@ Each run jointly trains the expression and AU branches. Use `--emotion-fold` and
 
 ### Fine-tune weights
 
-Fine-tune weights are provided through [Google drive]([https://github.com/MSA-LMC/SSM/releases](https://drive.google.com/drive/folders/16r6gvPjMV0anKe9pGWYk6yI4QrH5EIOf?usp=drive_link)), it will continue to provide updates. Each released checkpoint contains the complete joint model and evaluates both tasks. We release one primary `best_emotion.pth` per dataset/fold combination. `best_au.pth` is only an optional snapshot of the same joint model selected by AU F1 for comparison.
+Fine-tune weights are provided through [Google drive](https://drive.google.com/drive/folders/16r6gvPjMV0anKe9pGWYk6yI4QrH5EIOf?usp=drive_link), it will continue to provide updates. Each released checkpoint contains the complete joint model and evaluates both tasks. We release one primary `best_emotion.pth` per dataset/fold combination. `best_au.pth` is only an optional snapshot of the same joint model selected by AU F1 for comparison.
 
 ### Evaluation
 
