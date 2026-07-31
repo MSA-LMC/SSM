@@ -88,4 +88,4 @@ The configuration and fold pair must match the checkpoint.
 
 ### Acknowledgments
 
-This repository builds on [DFER-CLIP](https://github.com/zengqunzhao/DFER-CLIP), [OpenAI CLIP](https://github.com/openai/CLIP), and [CoOp](https://github.com/KaiyangZhou/CoOp).
+This repository builds on [DFER-CLIP](https://github.com/zengqunzhao/DFER-CLIP), [OpenAI CLIP](https://github.com/openai/CLIP), and [CoOp](https://github.com/KaiyangZhou/CoOp). We sincerely thank them for their open-source contributions！
