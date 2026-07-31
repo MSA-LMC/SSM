@@ -709,7 +709,7 @@ def train_fold_pair(
             str(paths["log"]),
             device,
         )
-        # Expression and AU checkpoints use their original task-specific rules.
+        # Both snapshots contain the full joint model; only epoch selection differs.
         is_best = epoch == 0 or val_acc > best_acc
         if is_best:
             best_acc = val_acc
@@ -753,6 +753,7 @@ def train_fold_pair(
         if epoch == 0 or f1_mean > max_f1:
             max_f1 = f1_mean
             best_f1_epoch = epoch
+            # Keep the AU-selected joint snapshot only for metric comparison.
             torch.save(model.state_dict(), paths["best_au"])
         if epoch == 0 or auc_mean > max_auc:
             max_auc = auc_mean
@@ -774,7 +775,7 @@ def train_fold_pair(
         )
         ema.restore()
 
-    # Final UAR/WAR are reported from the best expression checkpoint.
+    # The primary expression-selected checkpoint remains valid for both tasks.
     load_checkpoint_state(model, paths["best_emotion"], device)
     uar, war = evaluate_emotions(
         val_loader1,
@@ -832,7 +833,7 @@ def evaluate_checkpoint(
     emotion_fold,
     au_fold,
 ):
-    # Standalone evaluation reproduces both task metrics on one fold pair.
+    # One joint checkpoint reproduces both task metrics on one fold pair.
     args = build_runtime_args(config)
     set_reproducible_seed(args.seed)
     device = torch.device(config["runtime"].get("device", "cuda"))

@@ -13,7 +13,7 @@ from .temporal import (
 
 
 class DisfaSSM(nn.Module):
-    """Legacy-compatible SSM model for the eight-AU DISFA setting."""
+    """Joint SSM model for expressions and the eight DISFA action units."""
 
     def __init__(
         self,
@@ -455,6 +455,7 @@ class DisfaSSM(nn.Module):
         au_logits_sm = smooth_out.permute(0, 2, 1)
         au_logits_sm = au_logits_sm.reshape(-1, 8)
 
+        # One joint forward pass returns both expression and AU predictions.
         return (
             dfer_logits,
             0.1 * dfer_logits_2,

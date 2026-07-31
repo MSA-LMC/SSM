@@ -8,7 +8,9 @@ from ssm.config import apply_overrides, load_config, validate_config
 # Keep the command-line surface shared by all six dataset combinations.
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Train SSM with an emotion/AU dataset pair."
+        description=(
+            "Jointly train SSM on an expression/AU dataset pair."
+        )
     )
     parser.add_argument("--config", required=True)
     parser.add_argument("--emotion-root")
@@ -19,7 +21,7 @@ def parse_args():
     parser.add_argument(
         "--all-folds",
         action="store_true",
-        help="Run every configured expression/AU fold pair.",
+        help="Run every expression/AU fold pair as an independent joint run.",
     )
     parser.add_argument("--device")
     return parser.parse_args()

@@ -57,23 +57,23 @@ The six BP4D/DISFA and DFEW/FERV39K/MAFW combinations are configured in `configs
 python train.py --config configs/bp4d_dfew.json
 ```
 
-Use `--emotion-fold` and `--au-fold` for one fold pair, or `--all-folds` for all configured pairs. The release configurations reproduce the original three-GPU DataParallel setup.
+Each run jointly trains the expression and AU branches. Use `--emotion-fold` and `--au-fold` for one fold pair, or `--all-folds` for all configured pairs. The release configurations reproduce the original three-GPU DataParallel setup.
 
 ### Models
 
-Pretrained models will be provided through [GitHub Releases](https://github.com/MSA-LMC/SSM/releases). Expression results use `best_emotion.pth`, and AU results use `best_au.pth`.
+Pretrained models will be provided through [GitHub Releases](https://github.com/MSA-LMC/SSM/releases). Each released checkpoint contains the complete joint model and evaluates both tasks. We release one primary `best_emotion.pth` per dataset/fold combination. `best_au.pth` is only an optional snapshot of the same joint model selected by AU F1 for comparison.
 
 ### Evaluation
 
 ```bash
 python evaluate.py \
   --config configs/bp4d_dfew.json \
-  --checkpoint /path/to/checkpoint.pth \
+  --checkpoint /path/to/best_emotion.pth \
   --emotion-fold 5 \
   --au-fold 1
 ```
 
-The configuration and fold pair must match the checkpoint.
+One evaluation command reports both expression (`uar`, `war`) and AU (`f1`, `auc`) metrics. No second task-specific checkpoint is required. The configuration and fold pair must match the checkpoint.
 
 ### 📎 Citation
 

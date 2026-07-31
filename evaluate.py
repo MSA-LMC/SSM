@@ -8,10 +8,20 @@ from ssm.config import apply_overrides, load_config, validate_fold_pair
 # Evaluation uses the same config schema and fold identifiers as training.
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Evaluate an SSM checkpoint."
+        description=(
+            "Evaluate both expression and AU tasks from one joint "
+            "SSM checkpoint."
+        )
     )
     parser.add_argument("--config", required=True)
-    parser.add_argument("--checkpoint", required=True)
+    parser.add_argument(
+        "--checkpoint",
+        required=True,
+        help=(
+            "Joint model checkpoint. The primary best_emotion.pth "
+            "checkpoint supports both tasks."
+        ),
+    )
     parser.add_argument("--emotion-fold", type=int)
     parser.add_argument("--au-fold", type=int)
     parser.add_argument("--emotion-root")

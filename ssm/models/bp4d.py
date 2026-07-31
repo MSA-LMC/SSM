@@ -421,6 +421,7 @@ class Bp4dSSM(nn.Module):
             + 0.1 * au_logits_flat_2
         )
 
+        # One joint forward pass returns both expression and AU predictions.
         return (
             dfer_logits,
             0.1 * dfer_logits_2,
