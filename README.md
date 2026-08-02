@@ -75,7 +75,7 @@ python evaluate.py \
   --au-fold 1
 ```
 
-One evaluation command reports both expression (`uar`, `war`) and AU (`f1`, `auc`) metrics. No second task-specific checkpoint is required. The configuration and fold pair must match the checkpoint.
+One evaluation command reports both expression (`uar`, `war`) and AU (`f1`, `auc`) metrics. The configuration and fold pair must match the checkpoint.
 
 ### 📎 Citation
 
