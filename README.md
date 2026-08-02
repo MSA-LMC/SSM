@@ -70,7 +70,7 @@ Representative fine-tuned weights are provided through [Google drive](https://dr
 ```bash
 python evaluate.py \
   --config configs/bp4d_dfew.json \
-  --checkpoint /path/to/best_emotion.pth \
+  --checkpoint /path/to/best.pth \
   --emotion-fold 5 \
   --au-fold 1
 ```
