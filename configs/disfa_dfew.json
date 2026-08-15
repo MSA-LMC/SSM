@@ -1,0 +1,278 @@
+{
+  "legacy_compatibility": true,
+  "experiment": {
+    "name": "ssm_disfa_dfew_d5_a1",
+    "emotion_dataset": "DFEW",
+    "au_dataset": "DISFA",
+    "emotion_fold": 5,
+    "au_fold": 1,
+    "seed": 1,
+    "epochs": 30
+  },
+  "data": {
+    "emotion": {
+      "num_classes": 7,
+      "class_names": [
+        "happiness",
+        "sadness",
+        "neutral",
+        "anger",
+        "surprise",
+        "disgust",
+        "fear"
+      ],
+      "batch_size": 12,
+      "num_segments": 16,
+      "duration": 1,
+      "image_size": 224,
+      "workers": 4,
+      "shuffle_train": true,
+      "drop_last_train": true,
+      "drop_last_val": false,
+      "train_sampling": "legacy_random_segment",
+      "eval_sampling": "legacy_segment_center",
+      "normalization": {
+        "mean": [
+          0.48145466,
+          0.4578275,
+          0.40821073
+        ],
+        "std": [
+          0.26862954,
+          0.26130258,
+          0.27577711
+        ]
+      },
+      "augmentation": {
+        "brightness": 0.5,
+        "group_random_sized_crop": true,
+        "group_random_horizontal_flip": true,
+        "random_erasing": false
+      }
+    },
+    "au": {
+      "num_classes": 8,
+      "au_ids": [
+        1,
+        2,
+        4,
+        6,
+        9,
+        12,
+        25,
+        26
+      ],
+      "subjects": [
+        "SN001",
+        "SN002",
+        "SN009",
+        "SN010",
+        "SN016",
+        "SN026",
+        "SN027",
+        "SN030",
+        "SN032",
+        "SN006",
+        "SN011",
+        "SN012",
+        "SN013",
+        "SN018",
+        "SN021",
+        "SN024",
+        "SN028",
+        "SN031",
+        "SN003",
+        "SN004",
+        "SN005",
+        "SN007",
+        "SN008",
+        "SN017",
+        "SN023",
+        "SN025",
+        "SN029"
+      ],
+      "batch_size": 8,
+      "clip_len": 16,
+      "temporal_step": 1,
+      "stride": 16,
+      "image_size": 224,
+      "workers": 4,
+      "shuffle_train": true,
+      "drop_last_train": true,
+      "drop_last_val": true,
+      "skip_missing": true,
+      "verify_images": false,
+      "normalization": {
+        "mean": [
+          0.48145466,
+          0.4578275,
+          0.40821073
+        ],
+        "std": [
+          0.26862954,
+          0.26130258,
+          0.27577711
+        ]
+      },
+      "augmentation": {
+        "resize": 256,
+        "random_resized_crop": {
+          "size": 224,
+          "scale": [
+            0.8,
+            1.0
+          ],
+          "ratio": [
+            0.9,
+            1.1
+          ]
+        },
+        "horizontal_flip_probability": 0.5
+      }
+    },
+    "pairing": {
+      "one_batch_per_task": true,
+      "epoch_length": "longer_loader",
+      "restart_shorter_loader": true
+    }
+  },
+  "model": {
+    "clip_arch": "ViT-B/16",
+    "text_encoder_frozen": true,
+    "prompt": {
+      "contexts_number": 8,
+      "class_specific_contexts": "True",
+      "class_token_position": "end",
+      "text_type": "class_descriptor"
+    },
+    "temporal": {
+      "num_frames": 16,
+      "input_dim": 512,
+      "depth": 1,
+      "heads": 8,
+      "mlp_dim": 1024,
+      "dim_head": 64,
+      "au_depthwise_smoothing_half_window": 2
+    },
+    "moe": {
+      "replace_last_n_ffn": 6,
+      "private_experts": 4,
+      "expert_hidden_dim": 512,
+      "top_k": 2,
+      "temperature": 1.0,
+      "noise_std": 0.01,
+      "residual_alpha_init": 0.1
+    },
+    "semantic_mapping": {
+      "delta_map1_init": 0.0,
+      "delta_map2_init": 0.0,
+      "alpha_init": 0.1,
+      "beta_init": 0.1,
+      "epsilon": 1e-08,
+      "similarity_temperature": 0.01,
+      "semantic_logit_weight": 0.1,
+      "dataset_specific_prior": true
+    }
+  },
+  "optimization": {
+    "optimizer": {
+      "name": "AdamW",
+      "weight_decay": 0.0001,
+      "learning_rates": {
+        "encoder": 1e-06,
+        "delta_map1": 0.01,
+        "delta_map2": 0.01,
+        "other": 0.0001
+      }
+    },
+    "scheduler": {
+      "name": "MultiStepLR",
+      "milestones": [
+        15,
+        25
+      ],
+      "gamma": 0.1,
+      "step_timing": "after_epoch"
+    },
+    "mixup": {
+      "enabled": true,
+      "alpha": 0.4,
+      "scope": "clip_consistent_16_frames"
+    },
+    "ema": {
+      "enabled": true,
+      "decay": 0.99,
+      "update_after_optimizer": true,
+      "evaluate_with_ema": true
+    },
+    "loss_balance": {
+      "moving_mean_momentum": 0.95,
+      "epsilon": 1e-08,
+      "au_weight": 2.0,
+      "denominator": 3.0,
+      "auxiliary_ramp": {
+        "horizon_epochs": 30,
+        "gain": 10.0,
+        "formula": "2/(1+exp(-10*epoch/30))-1"
+      }
+    },
+    "gradient_clip_norm": 1.0
+  },
+  "runtime": {
+    "device": "cuda",
+    "data_parallel": true,
+    "gpu_ids": [
+      0,
+      1,
+      2
+    ],
+    "pin_memory": true,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": true,
+    "reset_seed_per_fold": true,
+    "print_frequency": 100
+  },
+  "evaluation": {
+    "emotion_metrics": [
+      "uar",
+      "war"
+    ],
+    "au_metrics": [
+      "mean_f1",
+      "per_au_f1",
+      "mean_auc"
+    ],
+    "checkpoint_selection_metric": "emotion_validation_uar",
+    "legacy_validation_pairing": "complete_emotion",
+    "au_threshold": {
+      "default": 0.5,
+      "search_start": 0.01,
+      "search_stop": 0.99,
+      "search_step": 0.01
+    },
+    "adaptive_vote": {
+      "enabled": true,
+      "half_window_min": 0,
+      "half_window_max": 7,
+      "search_all_vote_requirements": true,
+      "segment_safe": true,
+      "complete_frames": true,
+      "tie_reference": {
+        "half_window": 3,
+        "positive_ratio": 0.3,
+        "threshold": 0.5
+      }
+    }
+  },
+  "paths": {
+    "data_root": "data",
+    "emotion_frame_root": "data/DFEW/frames",
+    "emotion_train_manifest": "splits/emotion/DFEW/DFEW_set_{emotion_fold}_train.txt",
+    "emotion_val_manifest": "splits/emotion/DFEW/DFEW_set_{emotion_fold}_test.txt",
+    "au_image_root": "data/DISFA/images_aligned",
+    "au_train_manifest": "splits/disfa/DISFA_train{au_fold}.json",
+    "au_val_manifest": "splits/disfa/DISFA_test{au_fold}.json",
+    "clip_cache_dir": "",
+    "output_dir": "outputs/disfa_dfew/d{emotion_fold}_a{au_fold}"
+  }
+}
