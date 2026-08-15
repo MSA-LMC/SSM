@@ -1,6 +1,5 @@
-# 🚀 Bidirectional Learning of Facial Action Units and Expressions via Structured Semantic Mapping across Heterogeneous Datasets
+# Bidirectional Learning of Facial Action Units and Expressions via Structured Semantic Mapping across Heterogeneous Datasets
 
-> [Paper](https://arxiv.org/abs/2604.10541)
 
 <img width="561" height="238" alt="SSM framework overview" src="https://github.com/user-attachments/assets/84ff5187-1533-4353-b582-99ee7759d158" />
 
