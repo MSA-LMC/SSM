@@ -9,7 +9,7 @@ SSM presents a Structured Semantic Mapping (SSM) framework for bidirectional lea
 
 🎉 2026.08.04 This paper has been accepted by IEEE Transactions on Affective Computing (TAFFC).
 
-🚧 2026.07.31 The code is now available and will continue to be updated and improved....
+🚧 2026.07.31 The code is now available and will continue to be updated and improved...
 
 ## 🔑 Key Ideas
 
