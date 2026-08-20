@@ -94,7 +94,26 @@ One evaluation command reports both expression (`uar`, `war`) and AU (`f1`, `auc
   pages={1-16},
   doi={10.1109/TAFFC.2026.3722867}}
 
+@ARTICLE{11207542,
+  author={Chen, Yin and Li, Jia and Zhang, Yu and Hu, Zhenzhen and Shan, Shiguang and Wang, Meng and Hong, Richang},
+  journal={IEEE Transactions on Affective Computing}, 
+  title={Static for Dynamic: Towards a Deeper Understanding of Dynamic Facial Expressions Using Static Expression Data}, 
+  year={2026},
+  volume={17},
+  number={1},
+  pages={438-451},
+}
+
+@ARTICLE{10663980,
+  author={Chen, Yin and Li, Jia and Shan, Shiguang and Wang, Meng and Hong, Richang},
+  journal={IEEE Transactions on Affective Computing}, 
+  title={From Static to Dynamic: Adapting Landmark-Aware Image Models for Facial Expression Recognition in Videos}, 
+  year={2025},
+  volume={16},
+  number={2},
+  pages={624-638}}
 ```
+
 
 ## 📬 Contact
 
