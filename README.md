@@ -84,12 +84,16 @@ One evaluation command reports both expression (`uar`, `war`) and AU (`f1`, `auc
 ## 📎 Citation
 
 ```bibtex
-@article{li2026bidirectional,
-  title={Bidirectional Learning of Facial Action Units and Expressions via Structured Semantic Mapping across Heterogeneous Datasets},
+@ARTICLE{11653010,
   author={Li, Jia and Zhang, Yu and Chen, Yin and Hu, Zhenzhen and Li, Yong and Hong, Richang and Shan, Shiguang and Wang, Meng},
-  journal={arXiv preprint arXiv:2604.10541},
-  year={2026}
-}
+  journal={IEEE Transactions on Affective Computing}, 
+  title={Bidirectional Learning of Facial Action Units and Expressions Via Structured Semantic Mapping Across Heterogeneous Datasets}, 
+  year={2026},
+  volume={},
+  number={},
+  pages={1-16},
+  doi={10.1109/TAFFC.2026.3722867}}
+
 ```
 
 ## 📬 Contact
