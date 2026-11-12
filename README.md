@@ -14,6 +14,10 @@ SSM presents a Structured Semantic Mapping (SSM) framework for bidirectional lea
 
 🎉 2026.08.04 This paper has been accepted by IEEE Transactions on Affective Computing (TAFFC).
 
+## Related Repos
+- [S2D](https://github.com/MSA-LMC/S2D/tree/main) for Dynamic Facial Expression Recognition
+- [S4D](https://github.com/MSA-LMC/S4D/tree/main) for Dynamic Facial Expression Recognition
+- [CLAIP-Emo](https://github.com/MSA-LMC/CLAIP-Emo) for Audiovisual Emotion Recognition
 
 ## 🔑 Key Ideas
 
